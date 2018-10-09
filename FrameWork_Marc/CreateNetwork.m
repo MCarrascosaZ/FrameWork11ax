@@ -6,16 +6,16 @@ MaxChannels = 8;
 %Bmax=10E06;
 EB=(CWmin-1)*SLOT/2;
 
-MaxX=80;
-MaxY=80;
+MaxX=50;
+MaxY=50;
 
-disp('Density of APs');
-disp(N_APs/(MaxX*MaxY));
+%disp('Density of APs');
+%disp(N_APs/(MaxX*MaxY));
 
 
 for j=1:N_APs
     
-    AP(j).channel=ceil(MaxChannels*rand());    
+    AP(j).channel=j;%ceil(MaxChannels*rand());    
     AP(j).x = MaxX*rand();
     AP(j).y = MaxY*rand();    
     AP(j).stas = 0;
@@ -93,7 +93,6 @@ for i=1:N_STAs
     STA(i).ass=zeros(1,N_APs);
     STA(i).APs_range = 0;
     STA(i).APs_reward = zeros(1,N_APs);
-    STA(i).sticky = [0 , 0 , 0];    % First one is the sticky counter, second is the limit for some experiments, third is the global sticky counter
     
 
 
@@ -105,10 +104,10 @@ end
 PTdBm = 20;
 Pn=10^(-90/10);
 PLd1=40.05;
-shawdowing = 5;
+shawdowing = 0;
 
 shadowingmatrix = shawdowing*randn(N_APs+N_STAs);
-shadowingmatrix = triu(shadowingmatrix)+triu(shadowingmatrix)';
+%shadowingmatrix = triu(shadowingmatrix)+triu(shadowingmatrix)';
 
 
 fc=5; %Working in 5 Ghz
