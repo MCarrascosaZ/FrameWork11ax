@@ -49,9 +49,9 @@ end
 if(NA_STAs>0)
     disp('The following STAs are out of range of the AP');
     disp(STAs_unassociated(STAs_unassociated>0));
+end
     
-    
-else
+
     
     Redraw(CCA,AP,STA,NodeMatrix,1); % Execute to see the final scenario
     
@@ -106,8 +106,11 @@ else
     
     
     for i=1:N_STAs
-        rew(i)=STA(i).APs_reward(STA(i).associated_AP);
+        if(STA(i).associated_AP~=0)
+            rew(i)=STA(i).APs_reward(STA(i).associated_AP);
+        else
+            rew(i)=-1;
+        end
+        
     end
-    
-end
 end

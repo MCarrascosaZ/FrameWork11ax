@@ -11,7 +11,7 @@ for j=1:N_APs
 end
 
 for i=1:N_STAs
-   if(STA(i).nAPs>0)
+   if(STA(i).nAPs>0 && STA(i).associated_AP~=0)
         airtime = RequiredAirtimeUser(STA(i).B,STA(i).L,NodeMatrix(i+N_APs,STA(i).associated_AP));
         channel = AP(STA(i).associated_AP).channel;
         for j=1:N_APs
@@ -38,7 +38,7 @@ for i = 1:N_STAs
             else
                 STA(i).Be = STA(i).B*(airtime / AP(STA(i).associated_AP).airtime);
                 STA(i).satisfaction = STA(i).satisfaction + 0; % Just a formality
-                STA(i).APs_reward(STA(i).associated_AP) = STA(i).APs_reward(STA(i).associated_AP) + ((airtime /AP(STA(i).associated_AP).airtime));    % Uncomment for proportional rewards
+                STA(i).APs_reward(STA(i).associated_AP) = STA(i).APs_reward(STA(i).associated_AP) + ((airtime /AP(STA(i).associated_AP).airtime)/airtime);    % Uncomment for proportional rewards
             end
             STA(i).satisf(it)=STA(i).satisfaction;
             STA(i).accB(it)=STA(i).Be;
