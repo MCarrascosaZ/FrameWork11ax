@@ -1,4 +1,4 @@
-function [rew,STA,AP] = Main(AP,STA,assocs,seed)
+function [rew,STA,AP] = Main(AP,STA,assocs,seed,path)
 
 
 
@@ -19,7 +19,10 @@ rew=zeros(1,N_STAs);
 
 
 rng(seed);  %Sets seed for all number generators
-[AP,STA,NodeMatrix,shadowingmatrix]=CreateNetwork(N_APs,N_STAs,L,CWmin,SLOT,0);
+fid=fopen(path,'r');
+[AP,STA,NodeMatrix,shadowingmatrix]=CreateNetwork(N_APs,N_STAs,L,CWmin,SLOT,0,fid);
+N_APs=length(AP);
+N_STAs=length(STA);
 for i=1:N_STAs
     for j=1:N_APs
         if(NodeMatrix(i+N_APs,j)>=CCA)
