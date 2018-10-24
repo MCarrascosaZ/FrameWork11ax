@@ -17,8 +17,8 @@ if(fid==-1)
     
 else
     l=textscan(fid,'%c, %f, %f');
-    N_APs=sum(count(l{1,1},'a'));
-    N_STAs=sum(count(l{1,1},'s'));
+    N_APs=sum(count(l{1,1}','a'));
+    N_STAs=sum(count(l{1,1}','s'));
 end
 
 
